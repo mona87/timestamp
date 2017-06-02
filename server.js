@@ -30,16 +30,13 @@ moment.ISO_8601 ];
  	let param = req.params.param;
 	if (moment(param, formatArray, 'en').isValid()){
 		//convert to natural date to timestamp
-		console.log('is natural')
+		// console.log('is natural')
 
-		// console.log('m',moment(query.toString()).format("MMMM D, YYYY", 'en'));
 		let natural = moment(param,formatArray).format("MMMM D, YYYY", 'en')
 		//convert natural date to timestamp
 		let timestamp = moment(param,formatArray).toISOString();
 		//convert timestamp to unix
 		let unix = moment(timestamp).unix();
-			console.log(timestamp)
-		console.log(unix)
 
 		res.send({unix: unix, natural: natural});
 
@@ -58,7 +55,7 @@ convertToDate = (req, res, next) => {
 	let time = moment.unix(param).utc().format("MMMM D, YYYY");
 
 	if(time !== 'Invalid date'){
-		console.log('isValid')
+		// console.log('isValid')
 		//output
 		res.send({unix: parseInt(param), natural: time})
 	}
@@ -72,11 +69,10 @@ isNull = (req,res,next) => {
 	let param = req.params.param;
 
 	if(param){
-		console.log('isnull')
+		// console.log('isnull')
 		next()
 	}else{
-		console.log('null')
-	
+		res.send({unix: parseInt(param), natural: time})
 		// res.sendFile(path.resolve(__dirname + '/client/index.html'));
 	}
 }
